@@ -10,7 +10,6 @@ public:
                 i++;
             }
             comp += to_string(cnt) + word[i];
-            cout << word[i] << endl;
         }
         return comp;
     }
