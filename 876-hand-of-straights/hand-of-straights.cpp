@@ -1,33 +1,27 @@
 class Solution {
 public:
-    bool isNStraightHand(std::vector<int>& hand, int k) {
-        int n = hand.size();
-        if (n % k != 0) return false;
-
-        unordered_map<int, int> freq;
-        for (int card : hand) {
-            freq[card]++;
+    bool isNStraightHand(vector<int>& hand, int groupSize) {
+        int n=hand.size();
+        if(n%groupSize!=0){
+            return false;
         }
-
-        vector<int> keys;
-        for (const auto& pair : freq) {
-            keys.push_back(pair.first);
+        
+        map<int,int>mp;
+        for(int i=0;i<n;i++){
+            mp[hand[i]]++;
         }
-        sort(keys.begin(), keys.end());
-
-        for (int i = 0; i < keys.size(); i++) {
-            int currentCard = keys[i];
-            if (freq[currentCard] > 0) {
-                int count = freq[currentCard];
-                for (int j = 0; j < k; j++) {
-                    if (freq[currentCard + j] < count) {
+        map<int,int>::iterator it;
+        for(it=mp.begin();it!=mp.end();it++){
+            while(it->second>0){
+                for(int i=0;i<groupSize;i++){
+                    if(mp[it->first+i]>0){
+                        mp[it->first+i]--;
+                    }else{
                         return false;
                     }
-                    freq[currentCard + j] -= count;
                 }
             }
         }
-
         return true;
     }
 };
