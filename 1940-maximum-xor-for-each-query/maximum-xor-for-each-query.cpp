@@ -11,7 +11,7 @@ public:
         }
         int i = 0;
         while (i < n) {
-            ans.push_back(xr ^ mask);
+            ans.push_back(xr ^ mask); // for maximizing xor we need flip of givrn number
             xr ^= nums[n-1-i];
             i++;
         }
