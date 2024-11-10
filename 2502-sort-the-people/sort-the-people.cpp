@@ -5,7 +5,7 @@ public:
 
         vector<pair<int,string>> comb;
         for(int i=0;i<n;i++){
-            comb.push_back({heights[i],names[i]});
+            comb.emplace_back(heights[i],names[i]);
         }
 
         sort(begin(comb),end(comb),greater<>());
