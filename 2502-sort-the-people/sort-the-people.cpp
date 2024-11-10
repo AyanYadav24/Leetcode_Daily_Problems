@@ -18,8 +18,3 @@ public:
         return ans;
     }
 };
-
-auto init = []() {
-    
-    return 'c';
-}();
