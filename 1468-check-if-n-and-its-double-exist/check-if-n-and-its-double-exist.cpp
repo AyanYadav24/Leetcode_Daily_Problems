@@ -1,14 +1,16 @@
 class Solution {
 public:
     bool checkIfExist(vector<int>& arr) {
-        int n = arr.size();
-        bool ans = false;
-        sort(arr.begin(),arr.end());
-        for(int i=0;i<n;i++){
-            for(int j=i+1;j<n;j++){
-                if(2 * arr[i] == arr[j] || arr[i] == 2 * arr[j]) ans = true;
+        for (int i = 0; i < arr.size(); ++i) {
+            for (int j = 0; j < arr.size(); ++j) {
+                if (i == j) {
+                    continue;
+                }
+                if (arr[i] == arr[j] * 2) {
+                    return true;
+                }
             }
         }
-       return ans;
+        return false;
     }
 };
