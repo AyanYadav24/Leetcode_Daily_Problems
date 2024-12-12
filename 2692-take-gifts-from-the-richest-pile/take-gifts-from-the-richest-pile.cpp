@@ -7,11 +7,9 @@ public:
 
         while(k--){
             long long maxNum = pq.top();
-            cout << maxNum << endl;
             pq.pop();
             pq.push(floor(sqrt(maxNum)));
         }
-
         long long sum = 0;
         while(!pq.empty()){
             sum += pq.top();
