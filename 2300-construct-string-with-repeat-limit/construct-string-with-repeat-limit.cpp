@@ -1,4 +1,4 @@
-class Solution { 
+class Solution {
 public:
     string repeatLimitedString(string s, int rl) {
         unordered_map<char, int> mp;
@@ -13,11 +13,11 @@ public:
         }
 
         string ans = "";
-        
+
         while (!pq.empty()) {
             auto [ch, occ] = pq.top();
             pq.pop();
-            
+
             if (occ > rl) {
                 ans += string(rl, ch);
                 occ -= rl;
@@ -37,3 +37,10 @@ public:
         return ans;
     }
 };
+
+auto init = []() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    return 'c';
+}();
