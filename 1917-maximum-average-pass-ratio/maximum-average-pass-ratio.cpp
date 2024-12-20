@@ -1,40 +1,34 @@
 class Solution {
 public:
-    #define P pair<double, int>
-    double maxAverageRatio(vector<vector<int>>& classes, int extraStudents) {
-        int n = classes.size();
+    double maxAverageRatio(vector<vector<int>>& classes, int k) {
+        priority_queue<pair<double,int>> pq;
 
-        priority_queue<P> pq; //max-heap  -  //{max-delta, idx}
-
-        for(int i = 0; i < n; i++) {
-            double current_PR = (double)classes[i][0]/classes[i][1];
-            double new_PR = (double)(classes[i][0]+1)/(classes[i][1]+1);
-            double delta = new_PR - current_PR;
-            pq.push({delta, i});
+        for(int i=0;i<classes.size();i++){
+            double oldR = (double)classes[i][0]/classes[i][1];
+            double newR = (double)(classes[i][0]+1)/(classes[i][1]+1);
+            double delta = newR - oldR;
+            pq.push({delta,i});
         }
-        
-        //O(extraStudents * log(n))
-        while(extraStudents--) { //O(k)
-            auto curr = pq.top(); //log(n)
+
+        while(k--){
+            double delta = pq.top().first;
+            int ind = pq.top().second;
             pq.pop();
+            
+            classes[ind][0]++;
+            classes[ind][1]++; 
 
-            double delta = curr.first;
-            int idx = curr.second;
-
-            classes[idx][0]++; //incremeent total passing students in the class
-            classes[idx][1]++; //increment total students oin the class
-
-            double current_PR = (double)classes[idx][0]/classes[idx][1];
-            double new_PR = (double)(classes[idx][0]+1)/(classes[idx][1]+1);
-            delta = new_PR - current_PR;
-            pq.push({delta, idx}); //log(n)
+            double oldR = (double)classes[ind][0]/classes[ind][1];
+            double newR = (double)(classes[ind][0]+1)/(classes[ind][1]+1);
+            delta = newR - oldR;
+            pq.push({delta,ind});
         }
 
-        double result = 0.0;
-        for(int i = 0; i < n; i++) {
-            result += (double)classes[i][0]/classes[i][1];
+        double ans = 0.0;
+        for(int i=0; i<classes.size() ;i++){
+            ans +=  (double)classes[i][0]/classes[i][1];
         }
 
-        return result/n;
+        return ans / classes.size();
     }
 };
