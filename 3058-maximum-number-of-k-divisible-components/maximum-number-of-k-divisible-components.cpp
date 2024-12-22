@@ -7,7 +7,6 @@ class Solution {
         }
         sum %= k;
         if(sum==0)  count++;
-        
         return sum;
     }
 public:
