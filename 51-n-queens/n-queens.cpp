@@ -1,28 +1,21 @@
 class Solution {
 private:
     bool isSafe(int row, int col, vector<string> board, int n){
-        int rowdup = row;
-        int coldup = col;
-
-        //left up-diagonal
-        while(row >=0 && col>=0){
-            if(board[row][col] == 'Q') return false;
-            row--;col--;
+        for(int i=0;i<n;i++){
+            if(board[row][i] == 'Q') return false;
+            if(board[i][col] == 'Q') return false;
         }
-        row = rowdup;
-        col = coldup;
-
-        //down right-diagonal
-        while(row < n && col >= 0){
-            if(board[row][col] == 'Q') return false;
-            row++;col--;
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if((i+j == row+col) && board[i][j] == 'Q') return false;  
+            }
         }
-        row = rowdup;
-        col = coldup;
 
-        while(col >= 0){
-            if(board[row][col] == 'Q') return false;
-            col--;
+        for (int i=0;i<n;i++){
+            for (int j=0;j<n;j++){
+                if((i-j == row-col) && board[i][j] == 'Q') return false; 
+            }
         }
     return true;
     }
