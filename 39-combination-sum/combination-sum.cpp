@@ -6,7 +6,7 @@ public:
             return;
         }
         for (int j = i; j < n; j++) {
-            if (j != i && arr[j] == arr[j - 1]) continue; 
+            if (j > i && arr[j] == arr[j - 1]) continue; 
             if (arr[j] > target) break;
             curr.push_back(arr[j]);
             sum(j, target - arr[j], arr, curr, ans, n); 
