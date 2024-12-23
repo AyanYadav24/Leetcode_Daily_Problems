@@ -5,16 +5,11 @@ private:
             if(board[row][i] == 'Q') return false;
             if(board[i][col] == 'Q') return false;
         }
-        
+
         for(int i=0;i<n;i++){
             for(int j=0;j<n;j++){
-                if((i+j == row+col) && board[i][j] == 'Q') return false;  
-            }
-        }
-
-        for (int i=0;i<n;i++){
-            for (int j=0;j<n;j++){
-                if((i-j == row-col) && board[i][j] == 'Q') return false; 
+                if((i+j == row+col) && board[i][j] == 'Q') return false;
+                if((i-j == row-col) && board[i][j] == 'Q') return false;
             }
         }
     return true;
