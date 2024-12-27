@@ -16,7 +16,7 @@ public:
                 color[vertex] = 0;
             }
         }
-        return false;
+        return true;
     }
     vector<int> gardenNoAdj(int n, vector<vector<int>>& paths) {
         vector<int> color(n,0);
