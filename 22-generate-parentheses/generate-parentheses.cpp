@@ -5,16 +5,10 @@ public:
             ans.push_back(s);
             return;
         }
-        if(o<n){
-            s+='(';
-            solve(o+1,c,n,ans,s);
-            s.pop_back();
-        }
-        if(c<n && c<o){
-            s+=')';
-            solve(o,c+1,n,ans,s);
-            s.pop_back();
-        }
+        if(o<n)
+            solve(o+1,c,n,ans,s+'(');
+        if(c<n && c<o)
+            solve(o,c+1,n,ans,s+')');
     }
     vector<string> generateParenthesis(int n) {
         vector<string> ans;
