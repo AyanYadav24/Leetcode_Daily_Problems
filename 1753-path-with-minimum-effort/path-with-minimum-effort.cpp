@@ -18,6 +18,7 @@ public:
             int x = top.second.first;
             int y = top.second.second;
 
+            if(x == m-1 && y == n-1) return d;
 
             for(auto& dir : directions){
                 int x_ = x + dir[0];
