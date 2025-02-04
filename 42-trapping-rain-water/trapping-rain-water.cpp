@@ -28,7 +28,6 @@ public:
         int ans = 0;
 
         for(int i=0;i<n;i++){
-            cout << leftMax[i] << " " << rightMax[i] << endl;
             if(leftMax[i] != -1 && rightMax[i] != -1){
                 ans += min(arr[leftMax[i]],arr[rightMax[i]]) - arr[i];
             }
