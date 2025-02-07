@@ -1,53 +1,35 @@
 class Solution {
 public:
-    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
-        int V = graph.size();
+    bool dfs(int node, vector<vector<int>>& adj, vector<int>& vis, vector<int>& pathVis) {
+        vis[node] = 1;
+        pathVis[node] = 1;
 
-        vector<vector<int>> adj(V);
-        
-        
-        queue<int> que;
-	    vector<int> indegree(V, 0);
-	    int count = 0;
-	    //1
-	    for(int u = 0; u < V; u++) {
-	        for(int &v : graph[u]) {
-                adj[v].push_back(u);
-	            indegree[u]++;
-	        }
-	    }
-	    
-	    //2. Fill que, indegree with 0
-	    for(int i = 0; i < V; i++) {
-	        if(indegree[i] == 0) {
-	            que.push(i);
-	            count++;
-	        }
-	    }
-	    
-	    //3. Simple BFS
-        vector<bool> safe(V, false);
-	    while(!que.empty()) {
-	        int u = que.front();
-	        que.pop();
-            safe[u] = true;
-	        
-	        for(int &v : adj[u]) {
-	            indegree[v]--;
-	            
-	            if(indegree[v] == 0) {
-	                que.push(v);
-	                count++;
-	            }
-	            
-	        }
-	    }
-	    vector<int> safeNodes;
-        for(int i = 0; i < V; i++) {
-            if(safe[i]) {
+        for(int it : adj[node]){
+            if(!vis[it]){
+                if(dfs(it,adj,vis,pathVis)) return true;
+            }
+            if(pathVis[it]) return true;
+        }
+        pathVis[node] = 0;
+        return false;
+    }
+
+    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+        int n = graph.size();
+        vector<int> vis(n,0), pathVis(n,0);
+
+        for (int i = 0; i < n; i++) {
+            dfs(i, graph, vis, pathVis);
+        }
+
+        vector<int> safeNodes;
+        for (int i = 0; i < n; i++) {
+            if (!pathVis[i]) {
                 safeNodes.push_back(i);
             }
         }
+
         return safeNodes;
     }
 };
+
