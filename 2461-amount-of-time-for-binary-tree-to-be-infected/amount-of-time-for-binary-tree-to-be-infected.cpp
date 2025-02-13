@@ -49,7 +49,7 @@ public:
                 vis[temp] = true;
                 if(temp -> left && !vis[temp -> left]){
                     q.push(temp -> left);
-                    vis[temp -> left] = true;
+                    //vis[temp -> left] = true;
                     flag = true;
                 }
                 if(temp -> right && !vis[temp -> right]){
@@ -59,7 +59,7 @@ public:
                 }
                 if(temp != root && !vis[parent[temp]]){
                     q.push(parent[temp]);
-                    vis[parent[temp]] = true;
+                    //vis[parent[temp]] = true;
                     flag = true;
                 }
             }
