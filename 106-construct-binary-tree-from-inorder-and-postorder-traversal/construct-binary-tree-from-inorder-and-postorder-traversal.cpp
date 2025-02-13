@@ -14,7 +14,7 @@ public:
     TreeNode* solve(vector<int>& inorder, vector<int>& postorder, int& ind, int s, int e){
         if(s>e) return NULL;
         int i=s;
-        for(;i<e;i++){
+        for(;i<=e;i++){
             if(inorder[i] == postorder[ind]) break;
         }
         TreeNode* root = new TreeNode(postorder[ind]);
