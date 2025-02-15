@@ -41,7 +41,7 @@ public:
         int minutes = 0;
         q.push(node);
         while(!q.empty()){
-            bool flag  = false;
+            //bool flag  = false;
             int n = q.size();
             for(int i=0;i<n;i++){
                 TreeNode* temp = q.front();
@@ -49,22 +49,19 @@ public:
                 vis[temp] = true;
                 if(temp -> left && !vis[temp -> left]){
                     q.push(temp -> left);
-                    //vis[temp -> left] = true;
-                    flag = true;
+                    //flag = true;
                 }
                 if(temp -> right && !vis[temp -> right]){
                     q.push(temp -> right);
-                    vis[temp -> right] = true;
-                    flag = true;
+                    //flag = true;
                 }
                 if(temp != root && !vis[parent[temp]]){
                     q.push(parent[temp]);
-                    //vis[parent[temp]] = true;
-                    flag = true;
+                    //flag = true;
                 }
             }
-            if(flag)minutes++;
+            minutes++;
         }
-    return minutes;
+    return minutes-1;
     }
 };
