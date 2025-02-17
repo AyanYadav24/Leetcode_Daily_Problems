@@ -11,22 +11,17 @@
  */
 class Solution {
 public:
-    vector<int> vec;
-    void inorder(TreeNode* root){
-        if(!root) return;
-        inorder(root->left);
-        vec.push_back(root->val);
-        inorder(root->right);
+    bool inorder(TreeNode* root, unordered_map<int,int>& mp, int k){
+        if(!root) return false;
+        if(inorder(root->left,mp,k)) return true;
+        if(mp.contains(k-root->val)) return true;
+        mp[root->val]++;
+        if(inorder(root->right,mp,k)) return true;
+        return false;
+
     }
     bool findTarget(TreeNode* root, int k) {
-        inorder(root);
-        int i=0,j=vec.size()-1;
-        for(int k : vec) cout << k << " ";
-        while(i<j){
-            if(vec[i] + vec[j] == k) return true;
-            else if(vec[i] + vec[j] < k) i++;
-            else j--;
-        }
-        return false;
+        unordered_map<int,int> mp;
+        return inorder(root,mp,k);
     }
 };
