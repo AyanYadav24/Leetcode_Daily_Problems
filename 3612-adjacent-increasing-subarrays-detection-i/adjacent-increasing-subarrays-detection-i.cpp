@@ -12,7 +12,6 @@ public:
                     break;
                 }
             }
-            
             if(check){
                 for (int j = i + k; j < i + 2 * k - 1; j++) {
                     if (nums[j] >= nums[j + 1]) {
@@ -21,12 +20,10 @@ public:
                     }
                 }
             }
-            
             if (check) {
                 return true;
             }
         }
-        
         return false;
     }
 };
