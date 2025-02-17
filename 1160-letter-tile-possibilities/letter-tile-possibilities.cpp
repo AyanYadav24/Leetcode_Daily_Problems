@@ -32,10 +32,6 @@ public:
         allSubstrings(n-1,tiles,ans,temp);
 
         for (auto it : ans) {
-            cout << it << endl;
-        }
-
-        for (auto it : ans) {
             permute(0, it, uniquePermutes);
         }
         return uniquePermutes.size() - 1;
