@@ -1,32 +1,33 @@
 class Solution {
-    string help(vector<string>& nums, vector<string>& dp, int i,const string& s, set<string>& sets) {
-        if (i < 0) {
-            return s;
-        }
-        if (i == 0) {
-            if (sets.find(s) == sets.end()) {
-                return s;
-            }
-            return "";
-        }
-        if (!dp[i].empty()) {
-            return dp[i];
-        }
-        string op1 = s + '0';
-        dp[i] = help(nums, dp, i - 1, op1, sets);
-        if (!dp[i].empty()) {
-            return dp[i];
-        }
-        string op2 = s + '1';
-        dp[i] = help(nums, dp, i - 1, op2, sets);
-        return dp[i];
-    }
-
 public:
+    bool solve(string& ans, string& curr, int n, unordered_set<string>& st){
+        if(curr.size() == n){
+            if(st.find(curr) == st.end()){
+                ans = curr;
+                return true;
+            } 
+            return false;
+        }
+
+        // for(int i=0;i<n;i++){
+            for(char c = '0' ; c<= '1' ; c++){
+            curr += c;
+            if(solve(ans,curr,n,st)) return true;
+            curr.pop_back();
+            }
+        // }
+        return false;
+    }
     string findDifferentBinaryString(vector<string>& nums) {
-        set<string> sets(nums.begin(), nums.end());
-        vector<string> dp(nums.size() + 1, "");
-        string s = "";
-        return help(nums, dp, nums.size(), s, sets);
+        int n = nums.size();
+        unordered_set<string> st;
+        for(string s : nums){
+            st.insert(s);
+        }
+
+        string curr = "";
+        string ans = "";
+        solve(ans,curr,n,st);
+        return ans;
     }
 };
