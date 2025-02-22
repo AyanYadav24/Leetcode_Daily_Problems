@@ -8,7 +8,7 @@ public:
 }
     string longestPalindrome(string s) {
         int n = s.length();
-        int p=0,q=0;
+        int p=0;
         int ans = 0;
         memset(t,-1,sizeof(t));
         for(int i=0;i<n;i++){
@@ -16,10 +16,10 @@ public:
             for(int j=i;j<n;j++){
                 if( j-i+1 > ans && isPalindrome(i,j,s)){
                     ans = j-i+1;
-                    p=i;q=j;
+                    p=i;
                 }
             }
         }
-    return s.substr(p,q-p+1);
+    return s.substr(p,ans);
     }
 };
