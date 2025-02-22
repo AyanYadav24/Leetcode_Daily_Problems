@@ -14,7 +14,7 @@ public:
         int ans = 0;
         for(int i=0;i<n;i++){
             for(int j=i;j<n;j++){
-                if(isPalindrome(i,j,s) && j-i+1 > ans){
+                if( j-i+1 > ans && isPalindrome(i,j,s)){
                     ans = j-i+1;
                     p=i;q=j;
                 }
