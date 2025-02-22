@@ -13,6 +13,7 @@ public:
         int p=0,q=0;
         int ans = 0;
         for(int i=0;i<n;i++){
+            if(n-i <= ans) continue;
             for(int j=i;j<n;j++){
                 if( j-i+1 > ans && isPalindrome(i,j,s)){
                     ans = j-i+1;
