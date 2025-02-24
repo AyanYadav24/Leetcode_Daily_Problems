@@ -23,38 +23,6 @@ public:
         return false;
     }
 
-    void DFSAlice(int curr, int t, int income, vector<bool>& visited, vector<int>& amount) {
-        visited[curr] = true;
-
-        if(bobMap.find(curr) == bobMap.end() || t < bobMap[curr]) {
-            income += amount[curr];
-        } else if(t == bobMap[curr]) {
-            income += (amount[curr]/2);
-        }
-
-
-        if(adj[curr].size() == 1 && curr != 0) { //leaf node
-            aliceIncome = max(aliceIncome, income);
-        }
-
-        /*
-            {1} -> (2, 3)
-            2 -> 1
-            3 -> 1,....
-            (1) ---- (2)
-             |
-             |
-             (3)------.....
-        */
-
-        for(int &ngbr : adj[curr]) {
-            if(!visited[ngbr]) {
-                DFSAlice(ngbr, t+1, income, visited, amount);
-            }
-        }
-
-    }
-
     int mostProfitablePath(vector<vector<int>>& edges, int bob, vector<int>& amount) {
         int n = amount.size(); //n nodes (0 to n-1)
 
@@ -74,7 +42,37 @@ public:
         
         int income = 0;
         visited.assign(n, false);
-        DFSAlice(0, 0, income, visited, amount);
+
+        //BFS se karunga
+        queue<vector<int>> que;
+        //{node, time, income}
+        que.push({0, 0, 0});
+        
+        while(!que.empty()) {
+            int curr = que.front()[0];
+            int t = que.front()[1];
+            int income = que.front()[2];
+
+            que.pop();
+
+            if(bobMap.find(curr) == bobMap.end() || bobMap[curr] > t) {
+                income += amount[curr];
+            } else if(t == bobMap[curr]) {
+                income += (amount[curr])/2;
+            }
+
+            if(adj[curr].size() == 1 && curr != 0) {
+                aliceIncome = max(aliceIncome, income);
+            }
+
+            for(int &ngbr : adj[curr]) {
+                if(!visited[ngbr]) {
+                    que.push({ngbr, t+1, income});
+                }
+            }
+
+            visited[curr] = true;
+        }
 
         return aliceIncome;
     }
