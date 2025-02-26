@@ -1,7 +1,7 @@
 class Solution {
 public:
     int maxAbsoluteSum(vector<int>& nums) {
-        int global_max = INT_MIN;
+        int global_max = 0;
         int curr_max = 0;
 
         for(int i = 0; i < nums.size(); i++){
@@ -10,7 +10,7 @@ public:
             global_max = max(curr_max, global_max);
         }
 
-        int global_min = INT_MAX;
+        int global_min = 0;
         int curr_min = 0;
 
         for(int i = 0; i < nums.size(); i++){
