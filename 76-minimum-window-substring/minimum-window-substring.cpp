@@ -5,7 +5,7 @@ public:
         int n = t.length();
 
         if (m < n) return "";
-        unordered_map<char, int> mp;
+        vector<int> mp(128, 0);
 
         for (char c : t) mp[c]++;
 
