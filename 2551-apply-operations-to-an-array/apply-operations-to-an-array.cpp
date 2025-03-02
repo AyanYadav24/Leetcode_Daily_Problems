@@ -1,22 +1,26 @@
 class Solution {
 public:
     vector<int> applyOperations(vector<int>& nums) {
-        int zero = 0;
         int n = nums.size();
-        vector<int> v;
         for (int i = 0; i < n - 1; i++) {
             if (nums[i] == nums[i + 1]) {
                 nums[i] *= 2;
                 nums[i + 1] = 0;
             }
         }
-        for(int i=0;i<n;i++){
-            if(nums[i]!=0) v.push_back(nums[i]);
-            else zero++;
+        int i=0;
+        int j=1;
+        while(i<n && j<n){
+            if(nums[i]==0 && nums[j]!=0){
+                swap(nums[i++],nums[j++]);
+            }
+            else if(nums[i]==0 && nums[j]==0){
+                j++;
+            }
+            else{
+                i++;j++;
+            }
         }
-        for(int i=0;i<zero;i++){
-            v.push_back(0);
-        }
-        return v;
+        return nums;
     }
 };
