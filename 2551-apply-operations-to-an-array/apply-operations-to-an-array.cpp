@@ -8,8 +8,8 @@ public:
                 nums[i + 1] = 0;
             }
         }
-        int i=0;
-        int j=1;
+        for(int i : nums) cout << i << " ";
+        int i=0,j=1;
         while(i<n && j<n){
             if(nums[i]==0 && nums[j]!=0){
                 swap(nums[i++],nums[j++]);
