@@ -3,7 +3,7 @@ public:
     vector<string> ans;
     string temp;
 
-    void solve(int idx, string& s, set<string>& st) {
+    void solve(int idx, string& s, unordered_set<string>& st) {
         if (idx >= s.length()) {
             ans.push_back(temp);
             return;
@@ -22,7 +22,7 @@ public:
     }
 
     vector<string> wordBreak(string s, vector<string>& wordDict) {
-        set<string> st(wordDict.begin(), wordDict.end());
+        unordered_set<string> st(wordDict.begin(), wordDict.end());
         solve(0, s, st);
         return ans;
     }
