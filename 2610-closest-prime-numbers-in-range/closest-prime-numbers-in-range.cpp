@@ -19,6 +19,11 @@ public:
 
         for (int index = 1; index < primeNumbers.size(); index++) {
             int difference = primeNumbers[index] - primeNumbers[index - 1];
+            if(difference <= 2){
+                closestPair[0] = primeNumbers[index - 1];
+                closestPair[1] = primeNumbers[index];
+                return closestPair;
+            }
             if (difference < minDifference) {
                 minDifference = difference;
                 closestPair[0] = primeNumbers[index - 1];
