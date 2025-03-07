@@ -9,6 +9,7 @@ public:
 
         if(solve(idx + arr[idx],arr,vis) || solve(idx - arr[idx],arr,vis))
             return true;
+        vis[idx] = false;
         return false;
     }
     bool canReach(vector<int>& arr, int start) {
