@@ -1,31 +1,33 @@
 class Solution {
+private:
+    vector<pair<int,int>> dir = {{-1,0},{1,0},{0,-1},{0,1}};
 public:
-    vector<vector<int>> directions = {{-1,0},{1,0},{0,1},{0,-1}};
-    int solve(int i, int j, vector<vector<int>>& matrix, int m, int n, vector<vector<int>>& dp){
+    int dfs(int i,int j,vector<vector<int>>& matrix,vector<vector<int>>& dp){
+        if(dp[i][j]!=-1) return dp[i][j];
+        int maxPath = 1;
+        for(auto &d : dir){
+            int ni = i + d.first;
+            int nj = j + d.second;
 
-        if(dp[i][j] != -1) return dp[i][j];
-        int path_cnt = 1;
-        for(auto dir : directions){
-            int i_ = i + dir[0];
-            int j_ = j + dir[1];
-
-             if(i_ >= 0 && i_ < m && j_ >= 0 && j_ < n && matrix[i_][j_] > matrix[i][j]){
-                if(matrix[i_][j_] > matrix[i][j])
-                    path_cnt = max(path_cnt,1+solve(i_,j_,matrix,m,n,dp));
+            if(ni>=0 && nj>=0 && ni< matrix.size() && nj<matrix[0].size() && matrix[ni][nj]>matrix[i][j]){
+                maxPath = max(maxPath, 1 + dfs(ni,nj,matrix,dp));
             }
         }
-        return dp[i][j] = path_cnt;
+
+        return dp[i][j]=maxPath;
     }
     int longestIncreasingPath(vector<vector<int>>& matrix) {
         int m = matrix.size();
         int n = matrix[0].size();
-        vector<vector<int>> dp(m+1,vector<int>(n+1,-1));
-        int ans = INT_MIN;
+        int ans =0;
+        vector<vector<int>> dp(m,vector<int>(n,-1));
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
-                ans = max(ans,solve(i,j,matrix,m,n,dp));
+                int path = dfs(i,j,matrix,dp);
+                ans = max(path,ans);
             }
         }
-    return ans;
+
+        return ans;
     }
 };
