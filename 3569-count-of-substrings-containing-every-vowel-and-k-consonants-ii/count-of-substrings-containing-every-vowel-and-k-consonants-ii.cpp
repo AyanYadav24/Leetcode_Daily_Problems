@@ -9,19 +9,19 @@ public:
         while(j<n){
             if(v.find(s[j]) != v.end()) mp[s[j]]++;
             else cc++;
-            while(mp.size() >= 5 && cc >= k){
-                ans += n-j;
+            while(mp.size() == 5 && cc > k){
                 if(v.find(s[i]) != v.end()){
                     mp[s[i]] == 1 ? mp.erase(s[i]) : mp[s[i]]--;
                 }
                 else cc--;
                 i++;
             }
+            ans += j - i + 1;
             j++;
         }
     return ans;
     }
     long long countOfSubstrings(string s, int k) {
-        return countWithExactK(s,k) - countWithExactK(s,k+1);
+        return countWithExactK(s,k) - countWithExactK(s,k-1);
     }
 };
