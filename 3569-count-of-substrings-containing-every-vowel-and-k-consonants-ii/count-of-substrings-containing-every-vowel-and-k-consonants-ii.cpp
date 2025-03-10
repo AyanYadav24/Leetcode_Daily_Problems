@@ -9,7 +9,7 @@ public:
         while(j<n){
             if(v.find(s[j]) != v.end()) mp[s[j]]++;
             else cc++;
-            while(mp.size() == 5 && cc >= k){
+            while(mp.size() >= 5 && cc >= k){
                 ans += n-j;
                 if(v.find(s[i]) != v.end()){
                     mp[s[i]] == 1 ? mp.erase(s[i]) : mp[s[i]]--;
