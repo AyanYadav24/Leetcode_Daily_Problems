@@ -1,6 +1,6 @@
 class Solution {
 public:
-    bool isPossible(int val, vector<int>& nums, int k){
+    bool isPossible(int& val, vector<int>& nums, int& k){
         int i = 0, cnt = 0;
         while(i < nums.size()){
             if(nums[i] <= val){
