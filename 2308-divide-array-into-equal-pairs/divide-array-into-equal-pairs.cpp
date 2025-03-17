@@ -7,8 +7,7 @@ public:
         int s = 0;
         for(auto& it : mp){
             if(it.second % 2 != 0) return false;
-            s += it.second / 2;
         }
-    return s == n;
+    return true;
     }
 };
