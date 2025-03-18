@@ -5,7 +5,7 @@ public:
         int i = 0, j = 0, ans = 1, mask = 0;
         while(j < n){
             cout << mask << endl;
-            while(i < n && (mask & nums[j]) != 0){
+            while((mask & nums[j]) != 0){
                 mask ^= nums[i];
                 i++;
             }
