@@ -12,7 +12,7 @@ public:
                     int up = 0, left = 0;
                     if(i>0) up = dp[i-1][j];
                     if(j>0) left = dp[i][j-1];
-                    dp[i][j] = up + left;
+                    dp[i][j] =( up + left);
                 }
             }
         }
