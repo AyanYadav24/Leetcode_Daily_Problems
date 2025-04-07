@@ -1,25 +1,25 @@
 class Solution {
 public:
-    bool solve(int ind, vector<int>& nums, int tar, vector<vector<int>>& dp){
-        if(tar == 0) return true;
-        if(ind < 0 ) return false;
-
-        if(dp[ind][tar] != -1) return dp[ind][tar];
-        bool take = false;
-        if(tar >= nums[ind]){
-            take= solve(ind-1,nums,tar-nums[ind],dp);
-        }
-        bool not_take = solve(ind-1,nums,tar,dp);
-
-        return dp[ind][tar] =  take || not_take;
-
-    }
     bool canPartition(vector<int>& nums) {
-        int sum = 0, n = nums.size();
-        for(int num : nums) sum += num;
-        if(sum%2) return false;
-        int tar = sum / 2;
-        vector<vector<int>> dp(n,vector<int>(tar+1,-1));
-        return solve(n-1,nums,sum/2,dp);
+        int n = nums.size();
+        int s = 0;
+        for(int i=0;i<n;i++) s+=nums[i];
+
+        if(s%2 != 0) return false;
+
+        int k = s/2;
+        vector<vector<bool>> dp(n,vector<bool>(k+1,0));
+
+        for(int i=0;i<n;i++) dp[i][0] = true;
+        if(nums[0]<=k) dp[0][nums[0]] = true;
+        for(int i=1;i<n;i++){
+            for(int t=1;t<=k;t++){
+                int not_take = dp[i-1][t];
+                int take = false;
+                if(t >= nums[i]) take = dp[i-1][t-nums[i]];
+                dp[i][t] = take || not_take;
+            }
+        }
+        return dp[n-1][k];
     }
 };
