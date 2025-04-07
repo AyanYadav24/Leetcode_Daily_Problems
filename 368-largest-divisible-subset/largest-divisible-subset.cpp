@@ -1,26 +1,31 @@
 class Solution {
 public:
-    vector<int> temp;
-    void solve(int i, vector<int> &nums, vector<int> &ans, vector<int> &dp){
-        if(i >= nums.size()){
-            if(ans.size() > temp.size())
-                temp = ans;
+    int n;
+    void solve(int ind, vector<int>& nums, vector<int>& ans, vector<int>& temp, int last, vector<int>& dp){
+        if(ind >= n){
+            if(temp.size() > ans.size()) ans = temp;
             return;
         }
-        if((ans.size() == 0 || nums[i] % ans.back()  == 0) && dp[i] < (int)ans.size()+1){
-            dp[i] = ans.size()+1;
-            ans.push_back(nums[i]);
-            solve(i+1, nums, ans, dp);
-            ans.pop_back();
+
+        if(nums[ind] % last == 0 && dp[ind] < (int)temp.size()+1){
+            dp[ind] = temp.size() + 1;
+            temp.push_back(nums[ind]);
+            solve(ind+1,nums,ans,temp,nums[ind],dp);
+            temp.pop_back();
         }
-        solve(i+1, nums, ans, dp);
+
+        solve(ind+1,nums,ans,temp,last,dp);
+
+
     }
     vector<int> largestDivisibleSubset(vector<int>& nums) {
-        vector<int> ans;
-        sort(nums.begin(), nums.end());
-        vector<int> dp(nums.size(),-1);
-        solve(0, nums, ans, dp);
+        n = nums.size();
+        sort(nums.begin(),nums.end());
         
-        return temp;
+        vector<int> ans;
+        vector<int> temp;
+        vector<int> dp(nums.size(),-1);
+        solve(0,nums,ans,temp,1,dp);
+        return ans;
     }
 };
