@@ -1,8 +1,9 @@
 class Solution {
 public:
     int minOperations(vector<int>& nums, int k) {
-        sort(begin(nums),end(nums));
-        if(nums[0] < k) return -1;
+        //sort(begin(nums),end(nums));
+        for(int num : nums)
+        if(num < k) return -1;
         
         unordered_map<int,int> mp;
         int cnt = 0;
