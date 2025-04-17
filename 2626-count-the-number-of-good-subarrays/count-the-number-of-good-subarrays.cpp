@@ -9,7 +9,7 @@ public:
             freq[nums[r]]++;
             pairs += freq[nums[r]]-1;
 
-            while(l < n && pairs >= k){
+            while(pairs >= k){
                 res += n - r;
                 pairs -= freq[nums[l]]-1;
                 freq[nums[l]]--;
