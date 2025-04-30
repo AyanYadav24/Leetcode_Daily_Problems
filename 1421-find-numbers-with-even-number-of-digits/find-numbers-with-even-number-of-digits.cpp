@@ -1,18 +1,17 @@
 class Solution {
 public:
-    int digits(int num){
-        int len = 0;
-        while(num){
-            len++;
-            num/=10;
-        }
-    return len; 
-    }
     int findNumbers(vector<int>& nums) {
-        int cnt = 0;
-        for(int& num : nums){
-            if(digits(num) % 2 == 0) cnt++;
+        int ans = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            int count = 1;
+            while (nums[i] >= 10) {
+                nums[i] = nums[i] / 10;
+                count++;
+            }
+            if (count % 2 == 0) {
+                ans++;
+            }
         }
-    return cnt;
+        return ans;
     }
 };
