@@ -6,22 +6,21 @@ public:
 
         for(int i=0;i<n;i++){
             for(int j=0;j<n;j++){
-                mp[j-i].push_back(grid[i][j]);
+                mp[i-j].push_back(grid[i][j]);
             }
         }
         for(auto& it : mp) {
-            if(it.first > 0 ) sort(it.second.begin(),it.second.end());
+            if(it.first < 0 ) sort(it.second.begin(),it.second.end());
             else sort(it.second.begin(),it.second.end(),greater<int>());
         }
 
-        unordered_map<int, int> indices;
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                int diff = j - i;
-                grid[i][j] = mp[diff][indices[diff]];
-                indices[diff]++;
+         for(int i = n-1;i >=0;i--){
+            for(int j = n-1;j >=0 ;j--){
+                grid[i][j] = mp[i-j].back();
+                mp[i-j].pop_back();
             }
-        } 
+        }
+
         return grid;
     }
 };
