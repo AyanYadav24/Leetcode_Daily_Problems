@@ -20,7 +20,6 @@ public:
                 mp[i-j].pop_back();
             }
         }
-
         return grid;
     }
 };
