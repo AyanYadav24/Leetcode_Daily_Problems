@@ -6,16 +6,11 @@ public:
             int rem = (nums[i] % value + value) % value;
             freq[rem]++;
         }
-        int i = 0;
-        while (true) {
-            int rem = i % value;
-            if (freq[rem] > 0) {
-                freq[rem]--;
-            } else {
-                return i;
-            }
-            i++;
+        int MEX = 0;
+        while (freq[MEX % value] > 0) {
+            freq[MEX % value]--;
+            MEX++;
         }
-        return -1;
+        return MEX;
     }
 };
